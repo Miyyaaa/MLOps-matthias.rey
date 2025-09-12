@@ -1,7 +1,7 @@
 name: GitHub Actions Mlops
 on: [push]
 jobs:
-  Build and Push:
+  _Build_and_Push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
