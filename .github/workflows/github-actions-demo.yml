@@ -1,10 +1,18 @@
-name: GitHub Actions Demo
+name: GitHub Actions Mlops
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Build and Push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -t mlops . 
-      - run: docker run mlops
-      - run: docker run -p 8077:8077 mlops
+      - uses: docker/login-action@v3
+       with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: Miyaaaaa/mlops:latest
+      - run: docker build -t Miyaaaaa/mlops:latest .
